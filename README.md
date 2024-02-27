@@ -2,25 +2,25 @@
 
 An Electron application with Vue
 
-## Recommended IDE Setup
+## Рекомендуемые IDE Настройки
 
 - [VSCode](https://code.visualstudio.com/) + [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) + [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
 
-## Project Setup
+## Настройка проекта
 
-### Install
+### Установка
 
 ```bash
 $ npm install
 ```
 
-### Development
+### Запуск приложения в дев-моде
 
 ```bash
 $ npm run dev
 ```
 
-### Build
+### Билд приложения для разных платформ
 
 ```bash
 # For windows
