@@ -22,8 +22,10 @@
     "@electron-toolkit/utils": "^3.0.0",
     "dayjs": "^1.11.11",
     "element-plus": "^2.7.2",
-    "vuedraggable": "^4.1.0",
-    "sass": "^1.75.0"
+    "element-resize-detector": "^1.2.4",
+    "sass": "^1.75.0",
+    "vue3-drr-grid-layout": "^1.9.7",
+    "vuedraggable": "^4.1.0"
   },
   "devDependencies": {
     "@electron-toolkit/eslint-config": "^1.0.1",
