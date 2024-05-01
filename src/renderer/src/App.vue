@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { h, reactive, ref, defineAsyncComponent, computed, onMounted } from 'vue'
 import BaseClocks from './widgets/datetime/clock/BaseClocks.vue'
+// import { GridItem, GridLayout } from "vue3-drr-grid-layout";
 import Draggable from 'vuedraggable/src/vuedraggable'
+import MainGridPage from './widgets/MainGridPage.vue'
 const ipcHandle = () => window.electron.ipcRenderer.send('ping')
 
 const chosenWork = ref()
@@ -58,10 +60,8 @@ const secondWidgetList = ref([
 </script>
 
 <template>
-  <!-- <div class="list-group-item_raw" v-for="widget in widgetList" :key="widget.code">
-    {{ widget }}
-  </div> -->
-  <div class="drag-group">
+  <MainGridPage></MainGridPage>
+  <!-- <div class="drag-group">
     <draggable
       group="widgets"
       :list="widgetList"
@@ -99,14 +99,17 @@ const secondWidgetList = ref([
       </template>
     </draggable>
   </div>
-  <!-- <img alt="logo" class="logo" src="./assets/electron.svg" /> -->
   <div class="button-group"></div>
 
-  <!-- <input value="" type="checkbox" /> -->
-  <Transition name="fade" mode="in-out"> </Transition>
-  <!-- <Versions /> -->
+  <Transition name="fade" mode="in-out"> </Transition> -->
 </template>
 <style scoped>
+.text {
+  background-color: darkslategray;
+  border-radius: 5px;
+  padding: 1rem;
+}
+
 .drag-group {
   display: flex;
   flex-direction: row;
@@ -155,5 +158,69 @@ const secondWidgetList = ref([
 .fade-leave-to {
   transition: opacity 0.5s ease-in-out;
   opacity: 0;
+}
+
+.dashboard {
+  width: 100%;
+  margin: -20px -30px 0 -30px;
+}
+
+.vue-grid-layout {
+  background: #eee;
+}
+
+.vue-grid-item:not(.vue-grid-placeholder) {
+  background: #ccc;
+  border: 1px solid black;
+}
+
+.vue-grid-item .resizing {
+  opacity: 0.9;
+}
+
+.vue-grid-item .static {
+  background: #cce;
+}
+
+.vue-grid-item .text {
+  font-size: 24px;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  height: 100%;
+  width: 100%;
+}
+
+.vue-grid-item .no-drag {
+  height: 100%;
+  width: 100%;
+}
+
+.vue-grid-item .minMax {
+  font-size: 12px;
+}
+
+.vue-grid-item .add {
+  cursor: pointer;
+}
+
+.vue-draggable-handle {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 0;
+  left: 0;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10'><circle cx='5' cy='5' r='5' fill='#999999'/></svg>")
+    no-repeat;
+  background-position: bottom right;
+  padding: 0 8px 8px 0;
+  background-repeat: no-repeat;
+  background-origin: content-box;
+  box-sizing: border-box;
+  cursor: pointer;
 }
 </style>
