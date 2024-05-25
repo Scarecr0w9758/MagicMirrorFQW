@@ -7,5 +7,48 @@
   },
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "colorize.languages": [
+    "typescript",
+    "javascript",
+    "vue",
+    "css",
+    "sass",
+    "scss",
+    "less",
+    "postcss",
+    "sss",
+    "stylus",
+    "xml",
+    "svg"
+  ],
+  "editor.tokenColorCustomizations": {
+    "textMateRules": [
+      {
+        "scope": [
+          //following will be in italic (=FlottFlott)
+          // "comment",
+          "entity.name.type.class", //class names
+          "keyword", //import, export, return…
+          "constant", //String, Number, Boolean…, this, super
+          "storage.modifier", //static keyword
+          "storage.type.class.js", //class keyword
+          "variable.parameter"
+        ],
+        "settings": {
+          "fontStyle": "italic",
+          "foreground": "#5FD1A5"
+        }
+      },
+      {
+        "scope": [
+          //following will be in italic (=FlottFlott)
+          "comment"
+        ],
+        "settings": {
+          "fontStyle": "italic"
+        }
+      }
+    ]
   }
 }
