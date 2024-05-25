@@ -1,20 +1,40 @@
 <script setup lang="ts">
 import { h, reactive, ref, defineAsyncComponent, computed, onMounted } from 'vue'
 import { GridItem, GridLayout } from 'vue3-drr-grid-layout'
+import BaseClocks from './datetime/clock/BaseClocks.vue'
 
 // const gridItemComponent = computed(() => VueGridLayout.GridItem)
 
+const getWidgetByCode = (widgetCode: string) => {
+  let tmpComponent
+  switch (widgetCode) {
+    case 'clocksDefault':
+      tmpComponent = import('./datetime/clock/BaseClocks.vue')
+      tmpComponent = BaseClocks
+    default:
+      tmpComponent = import('./datetime/clock/BaseClocks.vue')
+      tmpComponent = BaseClocks
+  }
+
+  const asyncComponent = defineAsyncComponent({
+    loader: async () => await tmpComponent,
+    loadingComponent: h('div' as any, { isLoading: true })
+  })
+
+  return asyncComponent
+}
 // let GridLayout = VueGridLayout.GridLayout
 // let GridItem = VueGridLayout.GridItem
 // console.log(GridLayout)
 // const gridLayoutComponent = computed(() => VueGridLayout.GridLayout)
-const layout = ref([
-  { x: 0, y: 0, w: 2, h: 2, i: '0' },
-  { x: 2, y: 2, w: 2, h: 2, i: '1' },
-  { x: 4, y: 4, w: 2, h: 3, i: '2' },
-  { x: 6, y: 6, w: 2, h: 3, i: '3' },
-  { x: 8, y: 8, w: 2, h: 3, i: '4' }
-])
+const layout = [
+  { x: 0, y: 0, w: 1, h: 2, i: '1', code: 'clocksDefault' },
+  { x: 2, y: 2, w: 1, h: 1, i: '2' },
+  { x: 4, y: 4, w: 2, h: 3, i: '3' },
+  { x: 6, y: 6, w: 2, h: 3, i: '4' },
+  { x: 8, y: 8, w: 2, h: 3, i: '5' },
+  { x: 8, y: 8, w: 2, h: 3, i: '6' }
+]
 </script>
 
 <template>
@@ -25,9 +45,10 @@ const layout = ref([
       :col-num="6"
       :row-height="60"
       :is-mirrored="false"
-      :vertical-compact="true"
-      :margin="[10, 10]"
+      autoSize
+      preventCollision
       :use-css-transforms="true"
+      :margin="[10, 10]"
     >
       <template #default="{ gridItemProps }">
         <GridItem
@@ -38,18 +59,32 @@ const layout = ref([
           :w="item.w"
           :h="item.h"
           :i="item.i"
-          class="text"
           :key="item.i"
         >
-          {{ item.i }}
+          <!-- class="text" -->
+          <div style="background-color: aqua; padding: 1rem" v-if="item.code">
+            <component
+              background-color="#131313"
+              class="first-clocks"
+              :is="getWidgetByCode(item.code)"
+            ></component>
+          </div>
+          <div v-else>hi</div>
+          <!-- <div class="text" v-else>
+            {{ item.i }}
+          </div> -->
         </GridItem>
       </template>
     </GridLayout>
   </div>
 </template>
 <style scoped lang="scss">
+.vue-grid-item.vue-grid-placeholder {
+  background: green !important;
+}
 .layout {
   width: 100%;
+  height: 100%;
 }
 .text {
   padding: 0.5rem;
