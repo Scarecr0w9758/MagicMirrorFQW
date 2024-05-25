@@ -2,12 +2,15 @@
 
 body {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
+  flex: 1;
+  /* align-items: center;
+  justify-content: center; */
+  overflow-y: auto;
+  overflow-x: hidden;
   background-image: url('./wavy-lines.svg');
-  background-size: cover;
-  user-select: none;
+  /* background-size: cover; */
+  /* user-select: none; */
+  /* flex: 1; */
 }
 
 code {
