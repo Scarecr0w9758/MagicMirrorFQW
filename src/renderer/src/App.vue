@@ -1,42 +1,79 @@
 <script setup lang="ts">
-import { h, reactive, ref, defineAsyncComponent, computed, onMounted } from 'vue'
-import BaseClocks from './widgets/datetime/clock/BaseClocks.vue'
+import { h, reactive, ref, defineAsyncComponent, computed, onMounted, provide } from "vue"
+import BaseClocks from "./widgets/datetime/clock/BaseClocks.vue"
 // import { GridItem, GridLayout } from "vue3-drr-grid-layout";
-import Draggable from 'vuedraggable/src/vuedraggable'
-import MainGridPage from './widgets/MainGridPage.vue'
-const ipcHandle = () => window.electron.ipcRenderer.send('ping')
+import Draggable from "vuedraggable/src/vuedraggable"
+import MainGridPage from "./widgets/MainGridPage.vue"
+
+import { useRoute, useRouter } from "vue-router"
+import type { YMap } from "@yandex/ymaps3-types"
+import { YandexMap, YandexMapDefaultSchemeLayer } from "vue-yandex-maps"
+import MainDraggablePage from "./widgets/MainDraggablePage.vue"
+import BaseWeatherWidget from "./widgets/weather/BaseWeatherWidget.vue"
+import { getUserWidgets } from "../../../src/shared/api/requests/main-page/main-page"
+import { registerUser } from "../../../src/shared/api/requests/user/user"
+// import { getUserWidgets } from "@/shared/api/requests/main-page/main-page"
+// import { registerUser } from "@/shared/api/requests/user/user"
+import { routerKeys } from "../../../src/shared/router/router-keys"
+import { ERRORS_LIST } from "@/shared/symbols/errors"
+import { BaseError } from "@/shared/types/global/errors-types"
+
+const ipcHandle = () => window.electron.ipcRenderer.send("ping")
+
+const router = useRouter()
+const route = useRoute()
+
+const globalErrorsList = ref<BaseError[]>([])
+
+provide(ERRORS_LIST, {
+  errors: globalErrorsList,
+  addError: (error: BaseError) => globalErrorsList.value.push(error)
+})
+console.log("provided?..")
 
 const chosenWork = ref()
 const iDraggableInProcess = ref(false)
 const iDraggableDisabled = ref(false)
 const componentByCode = ref()
+const isInitLoading = ref(true)
 
 function choseWork(number) {}
 
 function getWidgetByCode(widgetCode: string) {
   let tmpComponent
   switch (widgetCode) {
-    case 'clocks':
-      tmpComponent = import('./widgets/datetime/clock/BaseClocks.vue')
+    case "clocks":
+      tmpComponent = import("./widgets/datetime/clock/BaseClocks.vue")
     // tmpComponent = BaseClocks
     // return import('./widgets/datetime/clock/BaseClocks.vue')
     default:
-      tmpComponent = import('./widgets/datetime/clock/BaseClocks.vue')
+      tmpComponent = import("./widgets/datetime/clock/BaseClocks.vue")
     // return import('./widgets/datetime/clock/BaseClocks.vue')
   }
 
   const asyncComponent = defineAsyncComponent({
     loader: async () => await tmpComponent,
-    loadingComponent: h('div' as any, { isLoading: true }),
+    loadingComponent: h("div" as any, { isLoading: true }),
     delay: 0
   })
 
   return asyncComponent
-
-  // componentByCode.value = defineAsyncComponent(() => {
-  //   return tmpComponent
-  // })
 }
+
+async function fetch() {
+  try {
+    const response = await getUserWidgets(1)
+    const response2 = await registerUser("hidow", "12345")
+
+    console.log("resp", response2)
+  } catch (error) {
+    console.error("error while Fetching App.vue", error)
+  } finally {
+    isInitLoading.value = false
+  }
+}
+// fetch()
+const map = ref<null | YMap>(null)
 
 // const asyncWidgetComponent = computed(() =>
 //   defineAsyncComponent(() => {
@@ -46,21 +83,50 @@ function getWidgetByCode(widgetCode: string) {
 
 const widgetList = ref([
   {
-    name: 'Часы',
+    name: "Часы",
     id: 1,
-    code: 'clocks'
+    code: "clocks"
   },
-  { name: 'Погода', id: 2, code: 'weather' }
+  { name: "Погода", id: 2, code: "weather" }
 ])
 
 const secondWidgetList = ref([
-  { name: 'Календарь', id: 3, code: 'calendar' },
-  { name: 'Почта', id: 4, code: 'mail' }
+  { name: "Календарь", id: 3, code: "calendar" },
+  { name: "Почта", id: 4, code: "mail" }
 ])
+function handlePush() {
+  console.log("router", router)
+  // router.push(routerKeys.AUTH.path)
+}
 </script>
 
 <template>
-  <MainGridPage></MainGridPage>
+  <!-- <yandex-map
+    v-model="map"
+    :settings="{
+      location: {
+        center: [37.617644, 55.755819],
+        zoom: 9
+      }
+    }"
+    width="100%"
+    height="500px"
+  >
+
+
+    <BaseWeatherWidget />
+    <MainGridPage></MainGridPage>
+
+    <yandex-map-default-scheme-layer />
+  </yandex-map> -->
+  GlErrors:{{ globalErrorsList }}
+  <router-view></router-view>
+  <!-- <button  @click="handlePush">PUSH TO GET TO AUTH</button> -->
+  <!-- <div v-if="isInitLoading"> -->
+  <!-- <router-view></router-view> -->
+  <!-- </div> -->
+  <!-- <div v-else>LOADING...</div> -->
+
   <!-- <div class="drag-group">
     <draggable
       group="widgets"
@@ -222,5 +288,11 @@ const secondWidgetList = ref([
   background-origin: content-box;
   box-sizing: border-box;
   cursor: pointer;
+}
+</style>
+<style lang="scss">
+// Глобальное переопределение стилей для element plus
+.el-form-item {
+  flex-direction: column;
 }
 </style>
