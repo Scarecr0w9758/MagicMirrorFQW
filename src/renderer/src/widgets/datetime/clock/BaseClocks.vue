@@ -70,6 +70,7 @@ onUnmounted(() => clearInterval(timeInterval))
 </template>
 <style scoped lang="scss">
 .tmp-white {
+  overflow: hidden;
   padding: 1rem;
   background-color: v-bind(backgroundColor);
 }
@@ -93,8 +94,7 @@ onUnmounted(() => clearInterval(timeInterval))
       width: 45px;
       height: 1px;
     }
-    &__name {
-    }
+
     &__blur {
       width: 50px;
       background-color: rgba(0, 0, 0, 0.4);
