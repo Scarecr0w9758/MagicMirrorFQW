@@ -20,10 +20,14 @@
   "dependencies": {
     "@electron-toolkit/preload": "^3.0.0",
     "@electron-toolkit/utils": "^3.0.0",
+    "@vueuse/core": "^10.9.0",
+    "axios": "^1.6.8",
     "dayjs": "^1.11.11",
     "element-plus": "^2.7.2",
     "element-resize-detector": "^1.2.4",
     "sass": "^1.75.0",
+    "vue-router": "^4.3.2",
+    "vue-yandex-maps": "^2.1.2",
     "vue3-drr-grid-layout": "^1.9.7",
     "vuedraggable": "^4.1.0"
   },
