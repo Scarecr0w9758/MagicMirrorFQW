@@ -1,6 +1,6 @@
-import './assets/main.css'
+import "./assets/main.css"
 
-import { app } from './index.js'
-app.mount('#app')
+import { app } from "./index.ts"
+app.mount("#app")
 
 // App.use(ElementPlus)
