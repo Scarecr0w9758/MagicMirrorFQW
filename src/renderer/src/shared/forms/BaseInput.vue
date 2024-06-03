@@ -1,5 +1,11 @@
 <template>
-  <el-input :show-password="type == 'password'" :type="type" v-model="modelValue" show-word-limit />
+  <el-input
+    :placeholder="placeholder"
+    :show-password="type == 'password'"
+    :type="type"
+    v-model="modelValue"
+    show-word-limit
+  />
 </template>
 
 <script setup lang="ts">
@@ -9,6 +15,7 @@ const props = withDefaults(
   defineProps<{
     text: string
     type?: string
+    placeholder: string
   }>(),
   {}
 )
