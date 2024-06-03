@@ -5,18 +5,18 @@ import axios, { AxiosError } from "axios"
 import { ElMessage } from "element-plus"
 
 export function addGlobalError(
-  injectedError: InjectionKey<{
+  errorFromServer: InjectionKey<{
     errors: Ref<BaseError[]>
     addError: (error: BaseError) => number
   }>,
   error: BaseError
 ) {
-  if (injectedError) {
+  if (errorFromServer) {
     ElMessage({
       type: "error",
       message: getServerError(error)
     })
-    return injectedError.addError(getServerError(error))
+    return errorFromServer.addError(getServerError(error))
   } else return console.error("Global Errors is not setted up. Something wrong with App.vue file")
 }
 
