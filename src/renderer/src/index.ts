@@ -1,10 +1,11 @@
 import ElementPlus, { ElTooltip } from "element-plus"
 import { createApp } from "vue"
 import App from "./App.vue"
+import ru from "element-plus/es/locale/lang/ru"
 // import "./styles/element/index.scss"
 import { createYmaps } from "vue-yandex-maps"
-
 import { router } from "../../shared/router/router"
+import InlineSvg from "vue-inline-svg"
 
 export const app = createApp(App)
 
@@ -23,4 +24,5 @@ app.use(
   })
 )
 
-app.use(ElementPlus)
+app.use(ElementPlus, { locale: ru })
+app.component("inline-svg", InlineSvg)
