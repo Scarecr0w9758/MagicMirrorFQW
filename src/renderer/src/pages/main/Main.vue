@@ -1,16 +1,14 @@
 <script setup lang="ts">
 // import { routerKeys } from "../../../src/shared/router/router-keys"
 import { routerKeys } from "@/shared/router/router-keys"
+import MainWidgets from "./MainWidgets.vue"
 
 const ipcHandle = () => window.electron.ipcRenderer.send("ping")
 </script>
 
 <template>
-  <br />
-  Main.vuehello!!!!
-  <router-link :to="routerKeys.AUTH.path">Click here to go to auth</router-link>
+  <main-widgets></main-widgets>
   <router-view></router-view>
-  <!-- <router-link :to="routerKeys.AUTH.path">Click here to go to auth</router-link> -->
 </template>
 <style scoped>
 .text {
