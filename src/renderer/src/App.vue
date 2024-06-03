@@ -119,7 +119,6 @@ function handlePush() {
 
     <yandex-map-default-scheme-layer />
   </yandex-map> -->
-  GlErrors:{{ globalErrorsList }}
   <router-view></router-view>
   <!-- <button  @click="handlePush">PUSH TO GET TO AUTH</button> -->
   <!-- <div v-if="isInitLoading"> -->
@@ -290,9 +289,19 @@ function handlePush() {
   cursor: pointer;
 }
 </style>
+
 <style lang="scss">
+* {
+  font-family: "Geologica", sans-serif;
+}
+
 // Глобальное переопределение стилей для element plus
+
 .el-form-item {
   flex-direction: column;
+}
+
+.el-calendar-day {
+  color: cadetblue;
 }
 </style>
