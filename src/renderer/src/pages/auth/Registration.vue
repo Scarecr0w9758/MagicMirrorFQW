@@ -1,5 +1,4 @@
 <template>
-  Register
   <div class="register-block">
     <el-form>
       <el-form-item label="Email">
