@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router"
 
 import { routesAuth } from "@/shared/router/routes/routes-auth"
-// import { routesMain } from "@/shared/router/routes/routes-main"
+import { routesMain } from "@/shared/router/routes/routes-main"
 import { routerKeys } from "@/shared/router/router-keys"
 // import { initGuards } from "@/shared/lib/guards/initGuards"
 

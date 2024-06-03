@@ -7,6 +7,10 @@ export const routerKeys = {
     path: "/main",
     name: "main"
   },
+  WIDGETS: {
+    path: "/widgets",
+    name: "widgets"
+  },
   AUTH: {
     path: "/auth",
     name: "auth",
