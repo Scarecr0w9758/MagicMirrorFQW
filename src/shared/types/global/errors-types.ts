@@ -1,3 +1,3 @@
 export interface BaseError {
-  message: string
+  errorMessage: string
 }
