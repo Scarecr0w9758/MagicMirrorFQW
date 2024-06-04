@@ -3,16 +3,22 @@
     <router-link :to="routerKeys.AUTH.children.LOGIN.path">Sign in</router-link>
     <router-link :to="routerKeys.AUTH.children.REGISTRATION.path">Registration</router-link>
   </div> -->
-  <div ref="registration" class="registration">
+  <div
+    ref="registration"
+    class="registration"
+    :class="{ ' registration__small-height': isLoginPage }"
+  >
     <div class="registration__links">
       <mirror-logo class="icon"></mirror-logo>
       <!-- <inline-svg class="icon" src="./logo.svg" /> -->
       <span v-if="route.path == routerKeys.AUTH.children.LOGIN.path">
-        Войти в волшебное зеркало
+        <b> Вход </b>
       </span>
-      <span v-else> Зарегистрироваться в волшебном зеркале </span>
+      <span v-else> Регистрация</span>
     </div>
-    <router-view> </router-view>
+    <transition name="slideY" mode="in-out" appear>
+      <router-view> </router-view>
+    </transition>
   </div>
 </template>
 
@@ -20,12 +26,14 @@
 import { routerKeys } from "@/shared/router/router-keys"
 import MirrorLogo from "./MirrorLogo.vue"
 import { useRoute, useRouter } from "vue-router"
-import { onMounted, ref } from "vue"
-import { computed } from "@vue/reactivity"
-console.log("ath!")
+import { onMounted, ref, computed } from "vue"
 
 const route = useRoute()
 const router = useRouter()
+
+const isLoginPage = computed(() => route.path.includes("login"))
+
+console.log("isLoginPage!", isLoginPage)
 </script>
 <style scoped lang="scss">
 .registration {
@@ -35,7 +43,11 @@ const router = useRouter()
   align-items: center;
   position: relative;
   width: 400px;
-  height: 500px;
+  height: 600px;
+
+  &__small-height {
+    height: 500px !important;
+  }
   &:before {
     background-color: #0d1321;
     border-radius: 0.5rem;
