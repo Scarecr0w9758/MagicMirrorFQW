@@ -32,13 +32,16 @@ onUnmounted(() => clearInterval(timeInterval))
 <template>
   <!-- {{ currentTime }} -->
   <div class="time-block">
-    <div>
-      {{ currentHours }}
+    <div class="time-block__hours-minutes">
+      <div>
+        {{ currentHours }}
+      </div>
+      <span>:</span>
+      <div>
+        {{ currentMinutes }}
+      </div>
     </div>
-    <div>
-      {{ currentMinutes }}
-    </div>
-    <div>
+    <div v-if="timeFormat == '12-hour'">
       {{ currentTimeFormat }}
     </div>
   </div>
@@ -46,8 +49,13 @@ onUnmounted(() => clearInterval(timeInterval))
 <style scoped lang="scss">
 .time-block {
   display: flex;
-  gap: 1rem;
+  gap: 0.5rem;
   font-size: 3rem;
   background-color: rgb(28, 28, 28);
+
+  &__hours-minutes {
+    display: flex;
+    gap: 0.2rem;
+  }
 }
 </style>
