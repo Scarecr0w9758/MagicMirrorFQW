@@ -1,0 +1,10 @@
+/* // Появление/исчезновение router-view */
+.slideY-enter-active,
+.slideY-leave-active {
+  transition: transform 0.6s;
+}
+
+.slideY-enter-from,
+.slideY-leave-to {
+  transform: translateY(100%);
+}
