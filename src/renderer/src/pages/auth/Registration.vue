@@ -2,19 +2,25 @@
   <div class="register-block">
     <el-form>
       <el-form-item label="Email">
-        <base-input v-model:text="email"></base-input>
+        <base-input placeholder="Введите email " v-model:text="email"></base-input>
       </el-form-item>
       <el-form-item label="Логин">
-        <base-input v-model:text="login"></base-input>
+        <base-input placeholder="Введите логин" v-model:text="login"></base-input>
       </el-form-item>
       <el-form-item label="Имя">
-        <base-input v-model:text="name"></base-input>
+        <base-input placeholder="Введите имя" v-model:text="name"></base-input>
       </el-form-item>
       <el-form-item label="Пароль">
-        <base-input type="password" v-model:text="password"></base-input>
+        <base-input
+          placeholder="Введите пароль"
+          type="password"
+          v-model:text="password"
+        ></base-input>
       </el-form-item>
       <el-form-item>
-        <el-button @click="onSubmit">Создать аккаунт</el-button>
+        <el-button class="width-100 primary-gradient-button" @click="onSubmit"
+          >Создать аккаунт</el-button
+        >
       </el-form-item>
     </el-form>
   </div>
