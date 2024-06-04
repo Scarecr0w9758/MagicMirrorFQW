@@ -291,6 +291,9 @@ function handlePush() {
 </style>
 
 <style lang="scss">
+// Подключение transition-эффектов глобально
+@import url("@/renderer/styles/transitions.scss");
+
 * {
   font-family: "Geologica", sans-serif;
 }
@@ -303,5 +306,47 @@ function handlePush() {
 
 .el-calendar-day {
   color: cadetblue;
+}
+
+.el-input__wrapper {
+  background-color: #f6f6f6;
+}
+
+.el-form-item__label {
+  justify-content: flex-start;
+}
+
+.el-button.primary-gradient-button {
+  background: linear-gradient(45deg, #626aef, #00adb5);
+  transition: all ease-in-out 0.3s;
+  color: white;
+  border: none;
+
+  &:hover {
+    cursor: pointer;
+    background: linear-gradient(45deg, #8086fc, #33e1eb);
+    transition: all ease-in-out 0.3s;
+
+    color: white;
+  }
+}
+
+// Глобальные классы для размеров
+.width-100 {
+  width: 100%;
+}
+
+// Глобальные классы для отступов
+.mt-1 {
+  margin-top: 1rem;
+}
+
+// Глобальные классы для эффектов
+.success-hover {
+  transition: all ease-in 0.2s;
+
+  &:hover {
+    background-color: #00adb5;
+  }
 }
 </style>
